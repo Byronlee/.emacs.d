@@ -1,0 +1,16 @@
+/home/simlegate/yicheng-checkon/app/views/counts/_exception_detail.html.slim
+/home/simlegate/yicheng-checkon/app/views/counts/#_exception_detail.html.slim#
+/home/simlegate/yicheng-checkon/app/views/counts/_count_result.html.slim
+/home/simlegate/yicheng-checkon/app/views/counts/#_count_result.html.slim#
+/home/simlegate/yicheng-checkon/app/models/count.rb
+/home/simlegate/yicheng-checkon/app/models/#count.rb#
+/home/simlegate/yicheng-checkon/app/controllers/staff_records_controller.rb
+/home/simlegate/yicheng-checkon/app/controllers/#staff_records_controller.rb#
+/home/simlegate/yicheng-checkon/app/models/mongoid/count.rb
+/home/simlegate/yicheng-checkon/app/models/mongoid/#count.rb#
+/home/simlegate/yicheng-checkon/app/models/staff_record.rb
+/home/simlegate/yicheng-checkon/app/models/#staff_record.rb#
+/home/simlegate/yicheng-checkon/app/views/common/_direct_modify_record.html.slim
+/home/simlegate/yicheng-checkon/app/views/common/#_direct_modify_record.html.slim#
+/home/simlegate/yicheng-checkon/app/models/ability.rb
+/home/simlegate/yicheng-checkon/app/models/#ability.rb#

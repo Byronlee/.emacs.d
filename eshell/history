@@ -1,0 +1,53 @@
+ls
+../app/models/
+ls
+cat record.rb 
+ls
+ls
+cd ..
+ls
+cd ..
+ls
+cd  util/
+ls
+rm task.rb~
+ls
+ruby task.rb 
+ruby task.rb 
+ls
+touch access_mongo.rb
+ls
+rm access_mongo.rb~
+ls
+ruby access_mongo.rb 
+ruby access_mongo.rb 
+ls
+ruby access_mongo.rb 
+ruby access_mongo.rb 
+pwd
+cd
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/task.rb 
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ls
+cd workspace/yicheng-checkon/config/
+ls
+cd ../
+ls
+cd app/models/
+ls
+cat record.rb 
+    event :submit do
+cd
+ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
