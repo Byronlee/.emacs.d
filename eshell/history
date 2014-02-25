@@ -48,6 +48,43 @@ ls
 cd app/models/
 ls
 cat record.rb 
-    event :submit do
+event :submit do
 cd
 ruby ~/workspace/yicheng-checkon/util/access_mongo.rb 
+ls
+ls
+mes
+ls
+mes
+cd mes
+cd ../..
+ls
+cd ..
+ls
+cd public/
+ls
+cd ckeditor_assets/
+ls
+cd pictures/
+ls
+cd 1/
+ls
+feh original_moble.jpg
+feh content_radio.jpg
+ls
+ls
+ls
+cd ..
+ls
+cd ..
+ls
+ls
+cd ../..
+ls
+cd assets/
+cd images/
+ks
+ls
+ls
+ks
+rails c

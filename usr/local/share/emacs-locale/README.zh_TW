@@ -1,0 +1,119 @@
+coding: utf-8
+
+Homepage:
+
+	* emacs-locale-zh-cn (.deb/.tar.gz/.zip)
+	https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-cn/
+
+	* emacs-locale-zh-tw (.deb/.tar.gz/.zip)
+	https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-tw/
+
+
+2013-11-03 emacs-locale-zh-cn/emacs-locale-zh-tw, ver 15.0-1beta2,
+
+	more package released:
+	* emacs-locale-zh-cn_windows.zip
+	for Windows Emacs 22.3-24.3, use Simplified Chinese (China) 
+	as default menu language;
+
+	* emacs-locale-zh-tw_windows.zip released:
+	for Windows Emacs 22.3-24.3, use Traditional Chinese (Taiwan)
+	as default menu language;
+
+	* emacs-locale-zh-cn.tar.gz
+	for Linux/Unix/BSD Emacs 22.3-24.3, use Simplified Chinese (China) 
+	as default menu language, and easy to toggle to Traditional Chinese
+	(Taiwan): just need to run following command as root:
+	emacs-locale -g zh_TW   (global, for all user)
+	or run
+	'emacs-locale --help' for more informations;
+
+
+2013-11-01 emacs-locale-zh-cn, ver 15.0-1beta1,
+	 Careone <emacslocale@126.com>
+
+適用于：
+	Emacs 22.3-24.3 for 
+	* Ubuntu/Debian (請下載 .deb 格式軟件包)
+	* BSD/Linux/Unix (.tar.gz。目前仍處于測試狀態，稍後發布)
+	* Windows (.zip 格式軟件包)
+
+使用說明
+	* 本次發布的軟件包版本(emacs-locale-zh-cn, 15.0-1beta1), 實際包含簡體中文/繁體中文
+	  兩種語言包, 即集成了原 emacs-locale-zh-cn 和 emacs-locale-zh-tw 兩種語言包。
+	  但默認語言為簡體中文。但可以通過以下方式，快速切換為繁體中文菜單模式：
+	  以 Emacs 24.3 為例：
+
+	**  Linux/Unix/BSD Emacs:
+
+	.deb 格式軟件包(適用於 Debian/Ubuntu/LinuxDeepin/KylinUbuntu/LinuxMint/...)：
+	     下載後直接安裝 deb 軟件包，重新啟動 Emacs 即可見效；
+
+	.tar.gz	格式軟件包(適用於 Linux/BSD/Unix/...)
+	     下載後，解壓縮到根目錄，重新啟動 Emacs 即可見效。
+	     友情提示：
+		如果是自己編譯的 Emacs, 默認的安裝目錄結構可能不是常見的
+		/usr/share/emacs/XX.X/lisp/*/*.el, 很可能是
+		/usr/local/share/emacs/XX.X/lisp/*/*.el（實際安裝位置請以編譯
+		Emacs 時的設置路徑為准）。這種情況下，需要手動
+		調整本語言包中相關菜單文件的位置，即把本軟件包中
+		usr/share/emacs/XX.X/lisp/ 目錄下的所有文件，移動到相應的
+		usr/local/share/emacs/XX.X/lisp/ 目錄下。重新啟動 Emacs 即可見效。
+		
+		強烈建議 Emacs 新手直接從系統軟件倉庫中安裝 Emacs, 盡可能不使用編譯安裝，
+		降低可能出現的異常和菜單語言失效！
+
+	方法1: (適用于 Emacs 熟手, 全局生效)
+	    直接修改全局配置文件 /etc/emacs24/site-start.d/86emacs-locale.el,
+	    把 (lang-zh-cn) 直接改為 (lang-zh-tw)。重新啟動 Emacs 即可生效；
+		 
+	方法2: (適用于 Emacs 生手，全局生效)
+	    復制 /usr/emacs/24.3/lisp/language/emacs-locale-zh-tw.el 的全部內容, 
+	    粘貼并替換原 /etc/emacs24/site-start.d/86emacs-locale.el 文件的內容(請不要
+	    隨意改變這個文件名，否則可能無法正確加載菜單語言文件和相關設置)。重新啟動 Emacs 即可生效；	
+
+	方法3: (適用于 Emacs 熟手，僅對當前用戶生效)
+	    步驟1: 以 root 用戶身份，刪除或禁用全局配置文件
+	 	/etc/emacs24/site-start.d/86emacs-locale.el；
+	    步驟2: 在自已的配置文件 ~/.emacs 中，手動加入以下內容(更詳細更直接的參數設置，可以參考上面的
+		86emacs-locale.el 文件)：
+		(require 'emacs-locale-zh-tw)
+	    重新啟動 Emacs 即可生效；
+		說明：這種方法可以實現不同用戶，使用不同的 Emacs 菜單語言。如 root 菜單語言為英文，
+		用戶1 使用簡體中文菜單，用戶 2 使用繁體中文菜單。
+
+	方法4: (適用于 Emacs 生手和熟手，對全部用戶生效)
+		以 root 用戶身份運行 emacs-locale -g zh_TW
+		即切換到繁體中文菜單。重新啟動 Emacs 後生效；
+
+	說明: 更多設置功能，請運行 emacs-locale --help 查看詳細信息
+	    （目前命令幫助支持英語，簡體中文，繁體中文三種語言環境的自動識別）
+
+	**  Windows Emacs:
+
+	.zip 格式軟件包(適用於 Windows Emacs)：
+	     下載後解壓縮軟件包，複製 emacs-xx.x 目錄下的所有文件到 Emacs 安裝
+	     目錄 emacs-locale 下，重新啟動 Emacs 即可見效；
+
+	方法1: (適用于 Emacs 熟手, 全局生效)
+	    直接修改全局配置文件 emacs-24.3/site-lisp/site-start.el, 
+	    修改以下內容：(說明：文件名也可能是 default.el) 
+	    *** 把 (lang-zh-cn) 直接改為 (lang-zh-tw)。
+	    *** 把 load-codings-zh-cn-unix 改為 load-codings-zh-tw-unix
+	    *** 把 load-codings-zh-cn-dos 改為 load-codings-zh-tw-dos
+	    重新啟動 Emacs 即可生效；
+		 
+	方法2: (適用于 Emacs 生手，全局生效)
+	    復制 emacs-24.3/lisp/language/emacs-locale-zh-tw.el 的全部內容, 
+	    粘貼并替換原 emacs-24.3/site-lisp/site-start.el 文件的內容(請不要
+	    隨意改變這個文件名，否則可能無法正確加載菜單語言文件和相關設置)。
+	    重新啟動 Emacs 即可生效；	
+
+	方法3: (適用于 Emacs 熟手，僅對當前用戶生效)
+	    步驟1: 以系統管理員身份，刪除或禁用全局配置文件
+	 	emacs-xx.x/site-lisp/site-start.el；
+	    步驟2: 在自已的配置文件 ~/.emacs 中，手動加入以下內容(更詳細更直接
+	    的參數設置，可以參考上面的 site-start.el 文件)：
+		(require 'emacs-locale-zh-tw)
+	    重新啟動 Emacs 即可生效；
+			 

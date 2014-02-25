@@ -1,0 +1,554 @@
+#! /bin/bash
+## coding: utf-8
+## original file name: emacs-locale
+#
+## set Emacs/XEmacs menu to other languages
+## updated by Careone <emacslocale@126.com>, 2013-11-03
+#
+## todo: XEmacs module partly completed only, not finial release
+
+## please set version number such as 'XX.XX' to diff higher or lower version, 
+#  and never be XX.XX.XX 
+VERSION='15.01'
+FILENAME="emacs-locale"
+
+### defines ###
+# ---- part 1: base defines for Emacs/XEmacs ----
+NAMEU='Emacs' #Name upcase
+NAMEL='emacs' #Name lowercase. !!! IMPORTANT string !!!
+
+TRANSOF="${NAMEL}-locale" #directory name
+###---- part 1: base defines end ----
+
+###---- part 2: differences for Emacs or XEmacs ----
+
+case "$NAMEL" in
+	emacs)
+## for bin/emacs-locale
+
+# LLANG: lower of ELANG. exmaple: zh_CN (ELANG) -> zh-cn (LLANG)
+#
+# LC: source of lisp/language/lang-cmds.el, which wrote by me,
+#
+# LL: source of site-lisp/LANG/lisp/language/loadlang-{lang}.el
+# notice: this file auto genrated by bin/emacs-locale
+# I hope that them will be builtin files of Emacs in future
+
+LC01="/usr/share/emacs/$EVER/lisp/$ELANG/language/lang-cmds.elc"
+LC02="/usr/share/emacs/$EVER/lisp/$ELANG/language/lang-cmds.el"
+LC03="/usr/share/emacs/$EVER/lisp/language/lang-cmds.elc"
+LC04="/usr/share/emacs/$EVER/lisp/language/lang-cmds.el"
+declare -a ARRAY_LC=( "$LC01" "$LC02" "$LC03" "$LC04" )
+
+LLANG=`echo "$ELANG" | cut -d'.' -f1 | tr "A-Z" "a-z" | sed 's/_/-/g'`
+LL01="/usr/share/emacs/$EVER/lisp/$ELANG/language/loadlang-${LLANG}.elc"
+LL02="/usr/share/emacs/$EVER/lisp/$ELANG/language/loadlang-${LLANG}.el"
+LL03="/usr/share/emacs/$EVER/lisp/language/loadlang-${LLANG}.elc"
+LL04="/usr/share/emacs/$EVER/lisp/language/loadlang-${LLANG}.el"
+declare -a ARRAY_LL=( "$LL01" "$LL02" "$LL03" "$LL04" )
+	;;
+
+  	xemacs):
+	#todo
+	;;
+
+	*) 
+echo "  Error: volid setting of '\$NAMEL' (should be 'emacs' or 'xemacs')."
+echo "Abort."
+	exit 0;
+	;;
+esac
+
+# Usage: usage
+# Print the usage.
+usage () {
+    cat <<EOF
+Usage: $FILENAME [OPTION]
+
+toggle $NAMEU menu to special language, for current user or global.
+
+Examples:
+ 	(Global) toggle $NAMEU menu language to zh_CN (Simplified Chinese, China),
+	or zh_TW (Traditional Chinese, Taiwan).
+        if no version given, try probe installed version
+
+ 	$FILENAME -g zh_CN    (global, root please)
+ 	$FILENAME -g zh_TW    (global, root please)
+ 	$FILENAME -g zh_CN 24 (global, root please)
+ 	$FILENAME -g zh_TW 24 (global, root please)
+
+	(Global) reset $NAMEU menu language to English
+	$FILENAME -g reset [VERSION]   (root please)
+
+	(Global) set $NAMEU menu language to English with hotsets
+	$FILENAME -g hotset   (root please)
+
+Toggle menu language related
+      -u, --user LANGUAGE [VERSION]
+ 	toggle $NAMEU menu to special language, for current user only.
+        if no version given, try probe installed version
+
+      -u, --user reset [VERSION]
+        reset menu language to English, for current user only
+
+      -u, --user hotset [VERSION]
+        set menu language to English with hotsets, for current user only
+
+      -g, --global LANGUAGE [VERSION]
+ 	(global) toggle $NAMEU menu to special languagema, for all users.
+        if no version given, try probe installed version
+
+      -g, --global reset [VERSION]
+        (global) reset menu language to English, for all users
+
+      -g, --global hotset [VERSION]
+        (gloabl) set menu language to English with hotsets, for all users
+
+Misc
+  -swap
+	swap CapsLock and Ctrl_L for current user and current session, and
+	run again to reset swapped keys to normal.
+  -rkey, --reset-keymap
+	(User) restore key map for current user and current session
+
+  -V, --version    print the version information and exit
+  -h, --help       print this message and exit
+  --help-en        print this message and exit (in English)
+  --help-cn        print this message and exit (in Simplified Chinese)
+  --help-tw        print this message and exit (in Traditional Chinese)
+
+Homepage:
+https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-cn/
+https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-tw/
+
+Please report bugs to Careone <emacslocale@126.com>.
+EOF
+}
+
+usage_zh_cn () {
+    cat <<EOF
+用法: $FILENAME [选项]
+
+切换当前用户或者所有用户(全局)的 $NAMEU 菜单到指定语言。
+
+示例:
+
+        $FILENAME -g zh_CN 24
+          (全局生效) 切换 $NAMEU 24菜单为简体中文(zh_CN)。需要以root用户运行
+        $FILENAME -g zh_TW 24
+          (全局生效) 切换 $NAMEU 24菜单为繁体中文(zh_TW)。需要以root用户运行
+
+切换菜单语言相关
+      -u, --user 语言 [版本]
+ 	(仅对当前用户生效) 指定某个 $NAMEU 版本的菜单为某种语言。如果没有给出版本，则自动检测已安装的版本
+      -u, --user reset [版本]
+        重置当前用户的 $NAMEU 菜单为英语
+      -u, --user hotset [版本]
+        重置当前用户的 $NAMEU 菜单为英语，并启用常用设置
+
+      -g, --global 语言 [版本]
+ 	(全局生效) 指定某个 $NAMEU 版本的菜单为某种语言。如果没有给出版本，则自动检测已安装的版本
+      -g, --global reset [版本]
+        重置所有用户的 $NAMEU 菜单为英语。需要以root用户运行
+      -g, --global hotset [版本]
+        重置所有用户的 $NAMEU 菜单为英语，并启用常用设置。需要以root用户运行
+
+杂项
+      -swap
+	在当前会话中交换大写锁(CapsLock)和左Ctrl键(Ctrl_L)。再次运行可以还原为正常按键
+      -rkey, --reset-keymap
+	还原当前会话的按键为正常按键
+
+      -V, --version    显示版本信息并退出
+      -h, --help       显示帮助信息并退出
+      --help-en        显示帮助信息并退出(英文)
+      --help-cn        显示帮助信息并退出(简体中文)
+      --help-tw        显示帮助信息并退出(繁体中文)
+
+主页: https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-cn/
+https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-tw/
+
+可以发送缺陷报告给 Careone <emacslocale@126.com>.
+EOF
+}
+
+usage_zh_tw () {
+    cat <<EOF
+用法: $FILENAME [選項]
+
+切換當前用戶或者所有用戶(全局)的 $NAMEU 菜單到指定語言。
+
+示例:
+
+        $FILENAME -g zh_CN 24
+          (全局生效) 切換 $NAMEU 24菜單為簡體中文(zh_CN)。需要以root用戶運行
+        $FILENAME -g zh_TW 24
+          (全局生效) 切換 $NAMEU 24菜單為繁體中文(zh_TW)。需要以root用戶運行
+
+切換菜單語言相關
+      -u, --user 語言 [版本]
+ 	(僅對當前用戶生效) 指定某個 $NAMEU 版本的菜單為某種語言。如果沒有給出版本，則自動檢測已安裝的版本。
+      -u, --user reset [版本]
+        重置當前用戶的 $NAMEU 菜單為英語
+      -u, --user hotset [版本]
+        重置當前用戶的 $NAMEU 菜單為英語，并啟用常用設置
+
+      -g, --global 語言 [版本]
+ 	(全局生效) 指定某個 $NAMEU 版本的菜單為某種語言。如果沒有給出版本，則自動檢測已安裝的版本。
+      -g, --global reset [版本]
+        重置當前用戶的 $NAMEU 菜單為英語。需要以root用戶運行
+      -g, --global hotset [版本]
+        重置當前用戶的 $NAMEU 菜單為英語，并啟用常用設置。需要以root用戶運行
+
+雜項
+      -swap
+	在當前會話中交換大寫鎖(CapsLock)和左Ctrl鍵(Ctrl_L)。再次運行可以還原為正常按鍵
+      -rkey, --reset-keymap
+	還原當前會話的按鍵為正常按鍵
+
+      -V, --version    顯示版本信息并退出
+      -h, --help       顯示幫助信息并退出
+      --help-en        顯示幫助信息并退出(英文)
+      --help-cn        顯示幫助信息并退出(簡體中文)
+      --help-tw        顯示幫助信息并退出(繁體中文)
+
+主頁: https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-cn/
+https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-tw/
+
+可以發送缺陷報告給 Careone <emacslocale@126.com>.
+EOF
+}
+
+## functions for more option
+
+
+### FUNCTION DEFINES for MESSAGE OUTPUT
+_echo_done () {
+	echo " Done."
+	}
+
+#
+
+function _errorBadOPT {
+cat <<EOF
+  Error: bad arguments, or arguments not enough.
+  Please run "$0 -h" for help.
+EOF
+}
+
+### extra functions for Emacs Windows
+
+### extra functions end
+
+## PART 2: main
+# Check the arguments.
+
+ARG="$@"
+for option in "$@"; do
+    case "$option" in
+    -h | --help)
+	CLANG=`env | grep "^LANG=" | sed 's/LANG=//' | cut -d'.' -f1`
+	case "$CLANG" in
+	  zh_CN)USAGE_LOCALE="usage_zh_cn" ;;
+	  zh_TW | zh_*)USAGE_LOCALE="usage_zh_tw" ;;
+	  en* | *)USAGE_LOCALE="usage" ;;
+	esac
+
+	"$USAGE_LOCALE"
+	exit 0 ;;
+
+    --help-cn)
+	usage_zh_cn
+	exit 0 ;;
+
+    -h | --help-en)
+	usage
+	exit 0 ;;
+
+    --help-tw)
+	usage_zh_tw
+	exit 0 ;;
+
+### ------------------------------------------
+# options for set Emacs/XEmacs menu language	
+#
+    -g | --global)
+## GLOBAL toggle menu language, available for all users
+## global configure file: /etc/emacsXX/site-start.d/86emacs-locale.el
+
+# usage: -g LANGUAGE VERSION
+# example: -g zh_CN 24.3
+# example: -g zh_CN
+
+	if [ "$#" -lt 2 ];then
+	  _errorBadOPT 1>&2
+	  exit 0
+	fi
+
+	ELANG="$2" #Emacs menu language
+
+	if [ "$#" -ge 3 ];then
+	EVER="$3"  #Emacs version
+	else
+# if no Emacs version given, probe installed version
+# check Emacs/XEmacs installed or not
+  if which "$NAMEL" &>/dev/null;then
+	 case "$NAMEL" in
+	    emacs)
+	CVER=`${NAMEL} --version 2>/dev/null | head -1 | cut -d' ' -f3 | cut -d'.' -f1-2`
+		;;
+	    xemacs)
+	CVER=`${NAMEL} -q -V -no-site-file | cut -d ' ' -f2 | cut -d '.' -f1-2`
+		;;
+	    *)#same as 'emacs'
+	CVER=`${NAMEL} --version 2>/dev/null | head -1 | cut -d' ' -f3 | cut -d'.' -f1-2`
+		;;
+	  esac
+  else echo "  Error: $NAMEU not installed. Abort." 1>&2
+	exit 0
+  fi
+  echo "Notice: no version given, and found $NAMEU $CVER installed."
+	EVER="$CVER"
+	fi
+
+	MVER=`echo "$EVER" | cut -d'.' -f1` #Emacs major version
+
+# extra language alias for zh_CN and zh_TW
+    case "$ELANG" in
+	[zZ][hH][-_][cC][nN] | [cC][nN])
+	  ELANG="zh_CN" ;;
+	[zZ][hH][-_][tT][wW] | [tT][wW])
+	  ELANG="zh_TW" ;;
+	*): ;;
+    esac
+
+# convert $ELANG (uppercase) to $LLANG (lowercase)
+# LLANG is lowercase of ELANG. for example: zh_CN -> zh-cn
+LLANG=`echo "$ELANG" | cut -d'.' -f1 | tr "A-Z" "a-z" | sed 's/_/-/g'`
+
+	echo "(Global) toggle $NAMEU $EVER menu language to $ELANG..."
+    [ `whoami` = "root" ] || { echo "root please"; exit 0; }
+	ECFG_UDIR="/etc/emacs${MVER}/site-start.d"
+	UNIX_ECFG="/etc/emacs${MVER}/site-start.d/86${TRANSOF}.el"
+ 	if [ ! -d "$ECFG_UDIR" ];then
+ 	  echo "  Error: directory '$ECFG_UDIR' not found." 1>&2
+ 	  echo "  maybe $NAMEU $EVER not installed yet. Quit." 1>&2
+ 	  exit 0;
+ 	fi
+
+# configure file to toggle menu language, 
+# named emacs-locale-zh-cn.el or similar
+LANG_CFG="/usr/share/$NAMEL/$EVER/lisp/language/${TRANSOF}-${LLANG}.el"
+  if [ -r "$LANG_CFG" ];then
+    echo "updating profile '$UNIX_ECFG' ..."
+	cp -f --backup "$LANG_CFG" "$UNIX_ECFG"
+  elif [ "$ELANG" = "reset" ] || [ "$ELANG" = "en" ]; then
+    echo "  Notice: reset $NAMEU $EVER menu language to English..."
+    if [ -e "$UNIX_ECFG" ];then
+      mv -f "$UNIX_ECFG" "${UNIX_ECFG}.disabled"
+    fi
+  elif [ "$ELANG" = "hotset" ]; then
+    echo "  Notice: set $NAMEU $EVER menu language to English with hotsets..."
+    if [ -e "$UNIX_ECFG" ];then
+      mv -f "$UNIX_ECFG" "${UNIX_ECFG}.disabled"
+    fi
+    echo "(require 'hotset-cmds)" > "$UNIX_ECFG"
+    echo "(hotset)" >> "$UNIX_ECFG"
+  else echo "Error: profile file not found or void, or not readable." 1>&2
+	echo "plese check file '$LANG_CFG' and try again. Quit." 1>&2
+	exit 0
+  fi
+  if [ "$?" = 0 ];then
+    echo "  Done."
+  fi
+	;;
+
+    -u | --user)
+## toggle menu language for current user
+## user configure file: ~/.emacs
+
+# usage: -u LANGUAGE VERSION
+# example: -u zh_CN 24.3
+# example: -u zh_CN
+
+	if [ "$#" -lt 2 ];then
+	  _errorBadOPT 1>&2
+	  exit 0
+	fi
+
+	ELANG="$2" #Emacs menu language
+
+	if [ "$#" -ge 3 ];then
+	EVER="$3"  #Emacs version
+	else
+# if no Emacs version given, probe installed version
+# check Emacs/XEmacs installed or not
+  if which "$NAMEL" &>/dev/null;then
+	 case "$NAMEL" in
+	    emacs)
+	CVER=`${NAMEL} --version 2>/dev/null | head -1 | cut -d' ' -f3 | cut -d'.' -f1-2`
+		;;
+	    xemacs)
+	CVER=`${NAMEL} -q -V -no-site-file | cut -d ' ' -f2 | cut -d '.' -f1-2`
+		;;
+	    *)#same as 'emacs'
+	CVER=`${NAMEL} --version 2>/dev/null | head -1 | cut -d' ' -f3 | cut -d'.' -f1-2`
+		;;
+	  esac
+  else echo "  Error: $NAMEU not installed. Abort." 1>&2
+	exit 0
+  fi
+  echo "Notice: no version given, and found $NAMEU $CVER installed."
+	EVER="$CVER"
+	fi
+
+	MVER=`echo "$EVER" | cut -d'.' -f1` #Emacs major version
+
+# extra language alias for zh_CN and zh_TW
+    case "$ELANG" in
+	[zZ][hH][-_][cC][nN] | [cC][nN])
+	  ELANG="zh_CN" ;;
+	[zZ][hH][-_][tT][wW] | [tT][wW])
+	  ELANG="zh_TW" ;;
+	*): ;;
+    esac
+
+# convert $ELANG (uppercase) to $LLANG (lowercase)
+# LLANG is lowercase of ELANG. for example: zh_CN -> zh-cn
+LLANG=`echo "$ELANG" | cut -d'.' -f1 | tr "A-Z" "a-z" | sed 's/_/-/g'`
+
+echo "toggle $NAMEU $EVER menu language to $ELANG, for current user only..."
+	ECFG_UDIR="$HOME"
+	UNIX_ECFG="$HOME/.emacs"
+ 	if [ ! -d "$ECFG_UDIR" ];then
+ 	  echo "  Error: directory '$ECFG_UDIR' not found." 1>&2
+ 	  echo "  maybe $NAMEU $EVER not installed yet. Quit." 1>&2
+ 	  exit 0;
+ 	fi
+
+# configure file to toggle menu language, 
+# named emacs-locale-zh-cn.el or similar
+LANG_CFG="/usr/share/$NAMEL/$EVER/lisp/language/${TRANSOF}-${LLANG}.el"
+  if [ -r "$LANG_CFG" ];then
+    echo "updating profile '$UNIX_ECFG' ..."
+	echo "(require '${TRANSOF}-${LLANG})" >> "$UNIX_ECFG"
+  elif [ "$ELANG" = "reset" ] || [ "$ELANG" = "en" ]; then
+    echo "  Notice: reset $NAMEU $EVER menu language to English..."
+    if [ -e "$UNIX_ECFG" ];then
+      cp -f "$UNIX_ECFG" "${UNIX_ECFG}.disabled"
+      sed -i "/^(require '${TRANSOF}-/d" "$UNIX_ECFG"
+      sed -i "/^(load \"${TRANSOF}-/d" "$UNIX_ECFG"
+ 
+      sed -i "/^(require 'hotset-cmds)/d" "$UNIX_ECFG"
+      sed -i "/^(load \"hotset-cmds\")/d" "$UNIX_ECFG"
+
+      sed -i "/^(hotset)/d" "$UNIX_ECFG"
+   fi
+  elif [ "$ELANG" = "hotset" ]; then
+    echo "  Notice: set $NAMEU $EVER menu language to English with hotsets..."
+    if [ -e "$UNIX_ECFG" ];then
+      cp -f "$UNIX_ECFG" "${UNIX_ECFG}.disabled"
+    fi
+    sed -i "/^(require '${TRANSOF}-/d" "$UNIX_ECFG"
+    sed -i "/^(load \"${TRANSOF}-/d" "$UNIX_ECFG"
+
+# force remove 'hotset-cmds' related lines to ensure no 2 or more same lines
+# existed
+    sed -i "/^(require 'hotset-cmds)/d" "$UNIX_ECFG"
+    sed -i "/^(load \"hotset-cmds\")/d" "$UNIX_ECFG"
+
+    sed -i "/^(hotset)/d" "$UNIX_ECFG"
+    echo "(require 'hotset-cmds)" >> "$UNIX_ECFG"
+    echo "(hotset)" >> "$UNIX_ECFG"
+  else echo "Error: profile file not found or void, or not readable." 1>&2
+	echo "plese check file '$LANG_CFG' and try again. Quit." 1>&2
+	exit 0
+  fi
+  if [ "$?" = 0 ];then
+    echo "  Done."
+  fi
+	;;
+ 
+   -swap)
+## to show current key maps, please type command "xmodmap -pke"
+
+	echo "(User) swap CapsLock and Ctrl_L for current user and current session..."
+	echo "  (for current user and current login only."
+	echo "  you can run '$0 -$1' again to reset key map to normal)"
+
+if ! which xmodmap &>/dev/null; then
+	echo "  Error: xmodmap not found, or not executable." 1>&2
+	echo "  Please install 'x11-xserver-utils' first! Quit." 1>&2
+	exit 0;
+else
+
+## define: swap Caps_Lock and Control_L
+_keySwap () {
+cat <<EOF
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
+EOF
+}
+
+# method 1:
+#	_keySwap >> ~/.xmodmap.swap
+#	xmodmap ~/.xmodmap.swap
+#
+# method 2:
+	_keySwap | xmodmap -
+  if [ "$?" = 0 ]; then
+	_echo_done
+  fi
+
+fi
+shift
+	 ;;
+
+   -rkey | --reset-keymap)
+	echo "(User) restore key map for current user and current session..."
+
+if ! which xmodmap &>/dev/null; then
+	echo "  Error: xmodmap not found, or not executable." 1>&2
+	echo "  Please install 'x11-xserver-utils' first! Quit." 1>&2
+	exit 0;
+else
+## define: reset key map
+_keyReset () {
+cat <<EOF
+remove Lock = Caps_Lock
+remove Control = Control_L
+keycode  37 = Control_L NoSymbol Control_L
+keycode  66 = Caps_Lock NoSymbol Caps_Lock
+add Lock = Caps_Lock
+add Control = Control_L
+EOF
+}
+
+_keyReset | xmodmap -
+
+  if [ "$?" = 0 ]; then
+	_echo_done
+  fi
+fi
+shift
+	 ;;
+
+    -V | --version)
+	echo "$0 $VERSION"
+	exit 0 ;;
+
+    --): ;;
+
+    -*)
+	echo "Unrecognized option \`$option'" 1>&2
+	exit 1;;
+    esac
+
+done
+
+exit 0; 
+

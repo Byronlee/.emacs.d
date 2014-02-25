@@ -1,0 +1,95 @@
+emacs-locale-zh-cn
+
+Known bugs for translated Emacs lisp/*/*.el files
+翻译过的 Emacs lisp/*/*.el 文件可能出现的已知问题
+
+2013-10-30 updated, by Careone <emacslocale@126.com>, ver 15.0
+
+Test for (测试环境)：
+
+Emacs 22.3 - 24.3 for Windows
+Emacs 23.1 for Ubuntu 10.04
+
+
+* problems in all Emacs version ( 在全部 Emacs 版本都存在的问题 )
+
+** #10001 menu-bar.el 
+
+*** Edit >> Bookmarks 下的子菜单仍显示英文. [ 暂无解决方案。]
+
+*** Buffers 下的子菜单仍显示英文. [ 暂无解决方案。]
+
+* problems in some Emacs versions ( 在某些 Emacs 版本中存在的问题 )
+
+** #20001 Emacs ? - 22.3 for Windows
+
+*** 某些文件的全部顶级菜单显示乱码。从 23.1 开始以后的新版本不存在这一问题。
+    包括 menu-bar.el, dired.el, calendar/cal-menu.el (以及 calendar/ 
+    目录下的其它文件) 等文件；
+
+    解决方案：保留顶级菜单为英文字符串不作翻译。
+
+** #20002 Emacs ? - 22.3 for Windows/Linux/...
+
+*** 默认情况下不要启用 global-linum-mode, 因为这一功能依赖的 linum.el 文件
+    在 23.1 以前的旧版本中并不存在；
+
+*** gb2312/gbk/gb18030 中文显示乱码或不完整，或半个字符
+
+	原因：Emacs 22.3 及以往旧版本对多国语言支持不是太好，而且不支持 
+	gb18030 中文编码, 从 23.1 开始才默认支持 gb18030。
+
+	解决方案：
+	1* 在 Emacs 22.3 及以往旧版本中, 不启用 gb18030 编码识别功能
+	(即不使用以下设置行): 而 23.1 及后来的版本中可以启动gb18030 编码识别功能；
+
+	(prefer-coding-system 'gb18030)
+	
+	2* 在 ~/.emacs 或 ~/_emacs 文件中新增或修改下面三项设置：
+
+(set-language-environment 'Chinese-GB)
+(setq-default pathname-coding-system 'euc-cn)
+(setq file-name-coding-system 'euc-cn)
+
+如果是 Emacs 22.3/Windows, 第一行请设为 Chinese-GB, 后面两行请设为 euc-cn;
+如果是 Emacs 22.3/Linux, 第一行请设为 Chinese-GB, 后面两行请设为 utf-8;
+
+如果是 Emacs 23.1/Windows 及更新的版本: 
+    第一行建议设为 UTF-8 (设为 Chinese-GB 也行）, 后面两行请设为 euc-cn;
+
+如果是 Emacs 23.1/Linux 及更新的版本: 
+    第一行建议设为 UTF-8 (设为 Chinese-GB 也行）, 后面两行请设为 utf-8;
+
+另外建议按下面的先后顺序来设置中文编码识别方式。
+重要提示：写在最后一行的，实际上最优先使用，最前面一行，反而放到最后才识别。
+utf-16le-with-signature 相当于 Windows 下的 Unicode 编码，这里也可写成
+utf-16 (utf-16 实际上还细分为 utf-16le, utf-16be, utf-16le-with-signature
+ 等多种）
+
+;;; ---------------------
+(prefer-coding-system 'cp950)
+(prefer-coding-system 'gb2312)
+(prefer-coding-system 'cp936)
+(prefer-coding-system 'gb18030)
+;(prefer-coding-system 'utf-16le-with-signature)
+(prefer-coding-system 'utf-16)
+(prefer-coding-system 'utf-8)
+;;; ---------------------
+
+** #20003 Emacs 23.2 - 24.2 for Windows/Linux/...
+
+*** 翻译过的 international/mule-cmds.el 无效，仍显示为英文。
+
+    解决方案：改用翻译过的 23.1 版本的 mule-cmds.el
+
+** #20004 Emacs 24.1 - 24.2 for Windows/Linux/...
+
+*** 翻译过的 menu-bar.el 除顶级菜单显示为中文外，其余全部下拉菜单仍显示为英文。
+    可能后续版本中存在同样问题；
+
+    解决方案：改用翻译过的 23.4 版本的 menu-bar.el, 并手动补上新增加的菜单项；
+
+*** 如果在无电池的台式机电脑中开启了 display-battery-mode 会报错。
+    可能后续版本中存在同样问题, 但 23.4 及以往版本无此问题。
+
+    解决方案：不使用这一功能。

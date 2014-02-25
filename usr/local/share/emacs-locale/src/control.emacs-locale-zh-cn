@@ -1,0 +1,29 @@
+Package: emacs-locale-zh-cn
+Version: 15.0-1beta2-22.3-24.3
+Architecture: all
+Maintainer: Careone <emacslocale@126.com>
+Installed-Size: 
+Depends: 
+Suggests: xkeycaps,emacs-locale-dev
+Recommends:
+Conflicts: 
+Replaces: emacs-locale, emacs-locale-zh-tw, emacs-locale-dev
+Section: translations
+Priority: optional
+Homepage: https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-cn/
+Description: GNU Emacs 22.3-24.3 menu language package for Simplified Chinese (China, zh_CN) 
+ Available for:
+ .
+ Emacs 22.3-24.3,
+ .
+ Ubuntu/Debian, BSD/Linux, Windows and more similar OS
+ .
+ *****************
+ .
+ Tested for:
+ .
+ * Emacs 23.1 for Ubuntu 10.04 lucid;
+ .
+ * Emacs 22.3 -24.3 for Windows;
+
+

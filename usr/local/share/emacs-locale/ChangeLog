@@ -1,0 +1,340 @@
+﻿coding: utf-8
+
+ChangeLog for:
+	* emacs-locale-dev
+	* emacs-locale-zh-cn
+	* emacs-locale-zh-tw
+
+Homepage:
+	* emacs-locale-dev (.deb/.tar.gz)
+	https://sourceforge.net/projects/emacslocale/files/emacs-locale-dev/
+
+	* emacs-locale-zh-cn (.deb/.tar.gz/.zip)
+	https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-cn/
+
+	* emacs-locale-zh-tw (.deb/.tar.gz/.zip)
+	https://sourceforge.net/projects/emacslocale/files/emacs-locale-zh-tw/
+
+
+2013-11-03 emacs-locale-zh-cn/emacs-locale-zh-tw, ver 15.0-1beta2,
+
+	more package released:
+	* emacs-locale-zh-cn_windows.zip
+	for Windows Emacs 22.3-24.3, use Simplified Chinese (China) 
+	as default menu language;
+
+	* emacs-locale-zh-tw_windows.zip released:
+	for Windows Emacs 22.3-24.3, use Traditional Chinese (Taiwan)
+	as default menu language;
+
+	* emacs-locale-zh-cn.tar.gz
+	for Linux/Unix/BSD Emacs 22.3-24.3, use Simplified Chinese (China) 
+	as default menu language, and easy to toggle to Traditional Chinese
+	(Taiwan): just need to run following command as root:
+	emacs-locale -g zh_TW   (global, for all user)
+	or run
+	'emacs-locale --help' for more informations;
+
+	* added: /usr/local/bin/emacs-locale
+
+	* updated README.zh_TW and convert to CR-LF new line symbols;
+
+	* fixed: some bad translate strings in lisp/zh_CN/play/animate.el;
+
+	* updated shared lisp/hotset-cmds.el, by removing some codes;
+
+
+2013-11-01 emacs-locale-zh-cn, ver 15.0-1beta1,
+	 Careone <emacslocale@126.com>
+
+	supported:
+	* Emacs 22.3-24.3, Linux/Unix/BSD, Windows
+	* for language: Simplified Chinese (zh_CN)
+
+	* removed: /usr/local/bin/emacs-locale (rewritted and not complete yet)
+
+	* moved: move translated lisp/*/*.el
+	 from /usr/share/emacs/XX.X/site-lisp/zh_CN/lisp/*/*.el
+	 to /usr/share/emacs/XX.X/lisp/zh_CN/*/*.el
+
+	* added: /usr/share/emacs/XX.X/lisp/zh_TW/*/*.el
+
+	* removed: translated /usr/share/emacs/XX.X/site-lisp/zh_CN/lisp/bookmark.el
+	 (not work)
+
+	* removed : directory /usr/share/emacs/site-lisp/custom/
+		    directory /usr/share/emacs/site-lisp/locale/
+
+	* added:
+	 VERSION/lisp/hotset-cmds.el
+		 lisp/language/lang-cmds.el
+		 lisp/language/load-codings-zh.el
+		 lisp/language/loadlang-zh-cn.el
+		 lisp/language/loadlang-zh-tw.el
+
+		 lisp/language/emacs-locale-zh-cn.el
+		 lisp/language/emacs-locale-zh-tw.el
+
+	* renamed: rename /etc/emacsXX/site-start.d/86default*.el to
+	 86emacs-locale.el
+
+	* TODO
+
+	** write manuals which in English, Simplified Chinese and Traditional
+	 Chinese (man emacs-locale)
+
+
+2013-05-22 emacs-locale-zh-tw, ver 2.0-1preview1~22.3-24.3,
+	Careone <emacs-locale@qq.com>
+
+	(Yes, is new version number from 2.0)
+
+	* 新增繁體中文語言包, 適用于 Emacs 22.3-24.3。有三種格式的軟體包可供選擇：
+
+	  ** (.deb)
+	    for Ubuntu/Debian and similar;
+
+	  ** (.tar.gz)
+	    for other Linux/BSD/Unix and similar;
+
+	  ** (.zip)
+	    for Windows
+
+	* new translated for zh_TW (Traditional Chinese, Taiwan),with
+	translate scripts included in package:
+
+	    lisp/menu-bar.el
+	    lisp/international/mule-cmds.el
+
+	for getting more translate script samples, please see
+	zh_CN/bin/* in package 'Emacs-locale-dev' which for zh_CN);
+
+	TODO
+
+	* rewrite and update /usr/local/bin/emacs-local
+	* rewirte and update zh_CN/bin/* translate scripts for
+	  package emacs-locale-zh-cn and emacs-locale-dev
+
+
+2013-01-03 ver 14, Careone <careone@wo.com.cn>
+
+下载地址:
+	* 发送主题为 emacs-locale 的邮件到邮箱 emacs-locale@qq.com ,
+	可以在自动回复的邮件中获得 Emacs 简体中文汉化包 [emacs-locale-zh-cn.deb/tar.gz/.zip],
+	以及开发包 [emacs-locale-dev.deb/.tar.gz]
+	的下载地址链接.
+
+	* 欢迎反馈 Emacs-locale 语言翻译包的 bug . 上报方式:
+	发送主题为 emacs-bug 的邮件到邮箱 emacs-locale@qq.com 即可
+	(因个人时间原因, 上网时间较少, 上报 bug 的邮件可能得不到有效回复, 敬请理解!)
+	只要个人精力和时间允许, 会继续维护和关注 Emacs 新版本及语言翻译包.
+
+友情提示: 本邮箱仅为自动回复邮箱. 若因其它技术问题或其它事宜需要联系本人, 请改
+	  用其它联系方式. 敬盼知悉!
+
+Download:
+ You can send a E-mail to "emacs-locale@qq.com" with subject "emacs-locale"
+to get an auto answer mail with download address from Kingsoft Kuaipan net disk
+
+	* rewrite /usr/local/bin/emacs-locale.zh_CN
+	(old file name: emacs-locale-zh-cn);
+
+	* new translated lisp/speedbar.el for zh_CN;
+
+Linux/Unix:
+
+	* merge multi MULE menu language packages of Emacs 22.3-24.2 to one package;
+
+	* redefine global start files:
+	old define: /etc/emacs/site-start.d/86locale-start.el
+	redefine:   /etc/emacs$MAJOR_VERSION/site-start.d/86$LANG-$MAJOR_VERSION.el
+
+	* keep global start template files:
+	/etc/emacs/site-start.d/locale.d/$LANG/86$LANG-$MAJOR_VERSION.el
+
+	* rewrite /usr/local/bin/emacs-locale-zh-cn, support all any other
+	languages and multi Emacs versions;
+
+Windows:
+
+	* merge multi MULE menu language packages of Emacs 22.3-24.2 to one package;
+
+2012-09-17 ver 12, Careone <careone@139.com>
+
+已翻译以下 lisp/*/*.el 文件为 zh_CN：
+
+	* lisp/bookmark.el ;暂未生效
+	* lisp/bs.el
+	* lisp/dired.el
+	* lisp/facemenu.el
+
+	* lisp/menu-bar.el
+	  ;menu-bar.el 24.1/24.2有缺陷，需要改用23.4版本的文件才能正常显示中文菜单项
+
+	* lisp/time.el
+
+	* lisp/calendar/cal-china.el2012-09-17 ver 12, Careone <careone@139.com>
+	* lisp/calendar/cal-menu.el
+	* lisp/calendar/lunar.el
+	* lisp/calendar/solar.el
+
+	* lisp/international/mule-cmds.el
+	  ;mule-cmds.el 23.2-24.2有缺陷，需要改用23.1版本的文件才能正常显示中文菜单项
+
+	* lisp/language/chinese.el
+
+	* lisp/net/eudc.el
+
+	* lisp/org/org.el
+
+	* lisp/play/animate.el
+
+	* lisp/textmodes/ispell.el
+
+	* lisp/vc/ediff-hook.el
+
+其它调整:
+	* 部分词条翻译文字细微调整；
+
+	* 重新改写了 emacs-locale-zh-cn 命令,使用新的参数方案；
+
+	* 默认翻译方案调整为 menu-bar.el 方案(zh-cn.el , 旧版本中称 zh-cn-2),
+	  原 chinese-menu.el + english-menu.el + mule-menu.el 方案(zh-cn-old.el,
+	  旧版本中称 zh-cn-1 仅保留用于参考和纪念意义)
+
+	* Linux: /etc/emacs/site-start.d/disabled.d/ 重命名为
+	  /etc/emacs/site-start.d/locale/ ;
+
+	* Linux: /etc/emacs/site-start.d/90custom-locale.el 参照 XEmacs 文件名规则,
+	  重命名为 /etc/emacs/site-start.d/86locale-start.el;
+
+	* Windows: site-lisp/default.el 位置调整为 site-lisp/zh_CN/default.el
+	  ,方便不同语言菜单文件可以设置各自独立的 default.el
+
+	* Windows: emacs-unreg-zh-cn.reg 注册表文件重命名为 emacs-unreg.reg
+	  (用于某些情况下清除 Emacs 注册表信息。)
+
+	* Windows: 移除了 zh_CN/lisp/play/sokoban.el 和 etc/sokoban.levels, 优化软件包结构;
+
+2012/08/03 ver 11, Careone <careone@139.com>
+	* update files for Linux in /usr/local/bin/:
+	  emacs-locale, emacs-locale-zh-zn, emacs-locale.global, emacs-locale.user;
+	* make .deb package for Emacs 23.1
+
+2012/07/30 ver 10, Careone <careone@139.com>
+	* 整理了多余的文件，优化文件结构；
+
+	* Linux/Windows: 更新翻译了以下文件:
+	zh_CN/lisp/menu-bar.el
+	zh_CN/lisp/facemenu.el
+ 	zh_CN/lisp/minibuffer
+	zh_CN/lisp/ediff-hook.el
+	zh_CN/lisp/dired.el
+	zh_CN/lisp/international/mule-cmds.el
+	zh_CN/lisp/org/org.el for Emacs 23.4 (不适用于24.1, 需要单独翻译 ver 24.1)
+	zh_CN/lisp/language/chinese.el
+ 	zh_CN/lisp/play/animate.el
+	zh_CN/lisp/net/eudc.el
+  	zh_CN/lisp/textmode/tex-mode.el
+	zh_CN/lisp/textmodes/ispell.el
+ 	zh_CN/lisp/emacs-lisp/lisp-mode.el
+	zh_CN/lisp/calendar/calendar-zh-cn.el
+
+	* Linux: /etc/emacs/site-start.d/disabled.d/ 重命名为 locale/ ;
+	* Linux: 添加新文件 /etc/emacs/site-start.d/90custom-locale.el ;
+
+	* Windows: 更新了 site-lisp/default.el, 不再需要修改注册表，也能正常显示中文菜单。
+	* Windows: 更新了 emacs-unreg-zh-cn.reg 注册表文件，方便某些情况下清除 Emacs 注册表信息。
+	* Windows: 添加了 zh_CN/lisp/play/sokoban.el 和 etc/sokoban.levels ;
+
+已知问题
+
+	* 目前仅完成了部分菜单的汉化, 部分二级/三级菜单及帮助信息仍显示英文；
+
+	* Linux(--m2): lisp/facemenu.el 二级菜单汉化不完整；
+	* Linux(--m2): lisp/bookmark.el 汉化后加载未出现汉化效果；
+
+   	* Linux: Emacs 23.1/Ubuntu 10.04 下，使用 --m1 或 --m2 方案后，tetris 俄罗斯方块游戏中
+	    出现多余的空行间隔(Emacs 23.4/ 24.1 for Windows 未发现这一缺陷，原因未知)；
+
+ 	* Windows: 部分菜单仍显示英文／中文乱码，但中文提示信息显示正常
+	(处理方案:在原中文译词后, 保留原英文字符串);
+
+	* Windows: 仅支持 Emacs 23.4/ 24.1 for Windows, 确认不支持 Emacs 22.3 for Windows;
+
+	* Windows: Emacs 24.1 for Windows, 使用时可能出现顶层菜单乱码，但下级菜单中文显示正常，
+	      且这一问题可能随时触发恢复正常(Emacs 23.4 for Windows 暂未发现此问题)；
+
+TODO
+
+	* 汉化日历模块文件 calendar/cal-china.el, calendar/holidays.el .
+
+2012/07/17 ver 9, Careone <careone@139.com>
+
+	* Windows/Linux: emacs-locale-zh-cn4win-linux.v9.zip for Windows and Linux released.
+
+2012/07/16 ver 8, Careone <careone@139.com>
+
+	* Linux(.deb): emacs-locale-zh-cn_24.1-1~careone8_all.deb for Ubuntu/ Debian released.
+
+	* 暂未提供 .rpm 软件包。可以参考 .deb 或 .zip 软件包进行变通处理.
+
+	* 添加了带参数的命令 /usr/local/bin/emacs-locale-zh-cn --m1 | --m2 | --en ，
+	可以随时切换汉化方案及返回纯英文界面；
+
+	* 把汉化后的 .el 文件按原文件出处，保存在
+	/usr/share/emacs/$VERSION/site-lisp/zh_CN/lisp/ 目录结构下,
+	方便多版本/多语言兼容，以及后续维护；
+
+已知问题
+
+	* 目前仅完成了部分菜单的汉化, 部分二级/三级菜单及帮助信息仍显示英文；
+
+	* Linux(--m2): lisp/facemenu.el 二级菜单汉化不完整；
+	* Linux(--m2): lisp/bookmark.el 汉化后加载未出现汉化效果；
+	* Linux(--m2): lisp/ediff-hook.el 汉化后加载未出现汉化效果；
+
+   	* Linux: Emacs 23.1/Ubuntu 10.04 下，使用 --m1 或 --m2 方案后，tetris 俄罗斯方块游戏中
+	    出现多余的空行间隔(Emacs 23.4/ 24.1 for Windows 未发现这一缺陷，原因未知)；
+
+ 	* Windows: 部分菜单仍显示英文／中文乱码，但中文提示信息显示正常;
+
+	* Windows: 仅支持 Emacs 23.4/ 24.1 for Windows, 确认不支持 Emacs 22.3 for Windows;
+
+	* Windows: Emacs 24.1 for Windows, 使用时可能出现顶层菜单乱码，但下级菜单中文显示正常，
+	      且这一问题可能随时触发恢复正常(Emacs 23.4 for Windows 暂未发现此问题)；
+
+TODO
+	* 汉化日历模块文件 calendar/cal-china.el, calendar/holidays.el .
+
+****
+
+已知问题/known bugs
+
+2012-12-24 Careone
+
+	* 目前仅完成了部分菜单的汉化, 部分二级/三级菜单及帮助信息仍显示英文；
+
+	* lisp/facemenu.el 二级菜单汉化不完整；
+
+	* lisp/bookmark.el 翻译后加载时未显示汉化效果(翻译文件暂不启用)；
+
+	* lisp/menu-bar.el
+
+	  ** (Linux) for Emacs 24.1/24.2有缺陷，需要换用23.4版本的文件才能正常显示中文菜单项;
+
+	  ** (Windows) 在某些 Emacs 版本中, 需要将翻译过的文件编码转为 Windows Unicode (即 UTF-16)
+	  才能正常工作；
+
+	* lisp/international/mule-cmds.el
+
+	  ** (Linux) for Emacs 23.2-24.2有缺陷，需要换用23.1版本的文件才能正常显示
+	  中文菜单项;
+
+	  ** (Windows) 在某些 Emacs 版本中, 需要将翻译过的文件编码转为 Windows Unicode (即 UTF-16)
+	  才能正常工作；
+
+	* lisp/language/chinese.el
+
+	  ** (Windows) 在某些 Emacs 版本中, 需要将翻译过的文件编码转为 Windows Unicode (即 UTF-16)
+	  才能正常工作；

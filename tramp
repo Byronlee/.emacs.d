@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <13/04/26 12:32:29 /home/simlegate/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <13/07/06 15:04:27 /home/simlegate/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -25,4 +25,6 @@
   ("remote-encoding" "base64")
   ("remote-decoding" "base64 -d -i")
   ("inline-compress" "gzip")
-  ("inline-decompress" "gzip -d")))
+  ("inline-decompress" "gzip -d"))
+ (["ssh" nil "61.139.87.55" nil]
+  nil))
